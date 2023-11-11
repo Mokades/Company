@@ -8,7 +8,7 @@ import JavaAdvanceddto.SalaryIntervalDistribution;
 
 public interface CompanyService {
 	Employee hireEmployee (Employee empl);
-	Employee fireEmployee (long id);
+	Employee fireEmployee(long id);
 	Employee getEmployee(long id);
 	List<Employee> getEmployeesByDepartment(String department);
 	List<Employee> getAllEmployees();
@@ -16,8 +16,8 @@ public interface CompanyService {
 	List<Employee> getEmployeeByAge(int ageFrom, int ageTo);
 	List<DepartmentAvgSalary> salaryDistributionByDepartments();
 	List<SalaryIntervalDistribution> getSalaryDistribution(int interval);
-	Employee updateDeaprtment(long id, String newDepartment);
-	void save(String filepath);
-	void restore(String filepath);
-
+	Employee updateDepartment(long id, String newDepartment);
+	Employee updateSalary(long id, int newSalary);
+	void save(String filePath);
+	void restore(String filePath);
 }
