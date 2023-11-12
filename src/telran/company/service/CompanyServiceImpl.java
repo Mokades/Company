@@ -27,9 +27,43 @@ public class CompanyServiceImpl implements CompanyService {
 	 *  returns reference to the being added Employee object
 	 */
 	public Employee hireEmployee(Employee empl) {
-		//TODO O[1]
-		return null;
+		long id = empl.id();
+		if(employeesMap.containsKey(id)){
+			throw new IllegalStateException("Employee already exists " + id);
+		}
+		employeesMap.put(id, empl);
+		addEmployeeSalary(empl);
+		addEmployeeDepartment(empl);
+		addEmployeeAge(empl);
+		return empl;
 	}
+
+	private void addEmployeeAge(Employee empl) {
+		LocalDate birthdate = empl.birthDate();
+		Set<Employee> set =
+				employeesAge.computeIfAbsent(birthdate, k -> new HashSet<>());
+		set.add(empl);
+	}
+
+	private void addEmployeeDepartment(Employee empl) {
+		String department = empl.department();
+//		Set<Employee> set = employeesDepartment.computeIfAbsent(department, k -> new HashSet<>());
+//		set.add(empl);
+		Set<Employee> set = employeesDepartment.get(department);
+		if (set == null) {
+			set = new HashSet<>();
+			employeesDepartment.put(department, set);
+		}
+		set.add(empl);
+		
+	}
+
+	private void addEmployeeSalary(Employee empl) {
+		employeesSalary.computeIfAbsent(empl.salary(), k -> new HashSet<>())
+		.add(empl);
+		
+	}
+	
 
 	@Override
 	/**
@@ -38,8 +72,47 @@ public class CompanyServiceImpl implements CompanyService {
 	 * the method must throw IllegalStateException
 	 */
 	public Employee fireEmployee(long id) {
-		// TODO Auto-generated method stub O[1]
-		return null;
+		Employee empl = employeesMap.remove(id);
+		if(empl == null) {
+			throw new IllegalStateException("Employee not found " + id);
+		}
+		removeEmployeesDepartment(empl);
+		removeEmployeesSalary(empl);
+		removeEmployeesAge(empl);
+		return empl;
+	}
+
+	private void removeEmployeesAge(Employee empl) {
+		LocalDate birthDate = empl.birthDate();
+		Set<Employee> set = employeesAge.get(birthDate);
+		set.remove(empl); //removing reference to being
+		//removed
+		//employee from the set
+		// of employees with the given birth date
+		if (set.isEmpty()) {
+			employeesAge.remove(birthDate);
+		}
+		
+	}
+
+	private void removeEmployeesSalary(Employee empl) {
+		int salary = empl.salary();
+		Set<Employee> set = employeesSalary.get(salary);
+		set.remove(empl);
+		if(set.isEmpty()) {
+			employeesSalary.remove(salary);
+		}
+		
+	}
+
+	private void removeEmployeesDepartment(Employee empl) {
+		String department = empl.department();
+		Set<Employee> set = employeesDepartment.get(department);
+		set.remove(empl);
+		if(set.isEmpty()) {
+			employeesDepartment.remove(department);
+		}
+		
 	}
 
 	@Override
@@ -49,8 +122,8 @@ public class CompanyServiceImpl implements CompanyService {
 	 * the method returns null
 	 */
 	public Employee getEmployee(long id) {
-		// TODO Auto-generated method stub O[1]
-		return null;
+		
+		return employeesMap.get(id);
 	}
 
 	@Override
@@ -60,6 +133,7 @@ public class CompanyServiceImpl implements CompanyService {
 	 */
 	public List<Employee> getEmployeesByDepartment(String department) {
 		// TODO Auto-generated method stub O[1]
+		
 		return null;
 	}
 
