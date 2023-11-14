@@ -119,5 +119,15 @@ public class InterviewTasks {
 		}
 		return res;
 	}
+	//Task for streams/ grouping
+	public static void displayDigitsDistribution() {
+		int nNumbers = 1_000_000;
+		//create streams of random int's each int number in range [1, Integer.Max_value]
+		//conversion to stream of STrings
+		//extracting separate char's from Strings
+		//grouping with counting of occurrences
+		//sorting in descending order of occurrences
+		//printing
+	}
 	
 }
