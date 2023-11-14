@@ -53,6 +53,7 @@ class StreamTest {
     System.out.println(mapOddEven);
     }
   @Test
+  @Disabled
   void displayOccurrenceSorted() { //отобразить повторяющиеся элементы в порядке убывания, как количества повторений так и количества символов в элементе
     String[] strings = {"lpm", "y", "a", "lpm", "aa", "yy", "yy", "aa", "lpm"};
     Map<String, Long> occurrencesMap = Arrays.stream(strings).collect(Collectors.groupingBy(s -> s, Collectors.counting()));
@@ -62,4 +63,12 @@ class StreamTest {
     .forEach(e -> System.out.printf("%s => %d\n", e.getKey(), e.getValue()));
     //распечатка с сортировкой по частоте встречаемости от большего к меньшему
   }
+  @Test
+	void stringStream() {
+		String string = "Hello";
+		//output: h,e,l,l,o
+		//string.chars().forEach(c -> System.out.printf("%c,", c));
+		string.chars().mapToObj(c -> "" + (char)c) //conversion to Stream<String>
+		.forEach(s -> System.out.print(s + ","));
+	}
 }
