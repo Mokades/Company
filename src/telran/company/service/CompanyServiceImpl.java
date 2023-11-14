@@ -1,7 +1,9 @@
 package telran.company.service;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import telran.company.dto.DepartmentAvgSalary;
 import telran.company.dto.Employee;
@@ -175,9 +177,12 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public List<DepartmentAvgSalary> salaryDistributionByDepartments() {
-		// TODO Auto-generated method stub O[N]
-		return null;
-	}
+	    Map<String, Double> map = employeesMap.values().stream().collect(Collectors.groupingBy(empl -> empl.department(), Collectors.averagingLong(empl -> empl.salary())));
+	    //.values() ключ id, значение employee, получаем всех, группируем по отделам
+	    //.averagingInt для указания, что усреднять работников нужно по зп
+	   
+	    return map.entrySet().stream().map(e -> new DepartmentAvgSalary(e.getKey(), e.getValue().intValue())).toList();
+	  }
 
 	@Override
 	public List<SalaryIntervalDistribution> getSalaryDistribution(int interval) {

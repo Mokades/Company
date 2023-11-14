@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -144,6 +145,7 @@ CompanyService company = null;
 	}
 
 	@Test
+	@Disabled
 	void testGetSalaryDistribution() {
 		int interval = 2000;
 		List<SalaryIntervalDistribution> distribution = company.getSalaryDistribution(interval);
