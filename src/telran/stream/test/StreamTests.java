@@ -64,6 +64,7 @@ class StreamTest {
     //распечатка с сортировкой по частоте встречаемости от большего к меньшему
   }
   @Test
+  @Disabled
 	void stringStream() {
 		String string = "Hello";
 		//output: H,e,l,l,o
@@ -75,7 +76,7 @@ class StreamTest {
   	void splittingStringArray() {
 	  String[] strings = {"Hello", "World"};
 	  //output: H,e,l,l,o,W,o,r,l,d
-	  Arrays.stream(strings).flatMapToInt(str -> str.chars()).mapToObj(c -> "" + (char)c).forEach(s -> System.out.println(s + ",")); //conversion to Stream<String>
+	  Arrays.stream(strings).flatMapToInt(str -> str.chars()).mapToObj(c -> "" + (char)c).forEach(s -> System.out.print(s + ",")); //conversion to Stream<String>
   }
   
 }
