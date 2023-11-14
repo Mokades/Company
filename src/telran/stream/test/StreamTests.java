@@ -73,8 +73,9 @@ class StreamTest {
 	}
   @Test
   	void splittingStringArray() {
-	  String[] strings = {"Hello", "World"}
+	  String[] strings = {"Hello", "World"};
 	  //output: H,e,l,l,o,W,o,r,l,d
+	  Arrays.stream(strings).flatMapToInt(str -> str.chars()).mapToObj(c -> "" + (char)c).forEach(s -> System.out.println(s + ",")); //conversion to Stream<String>
   }
   
 }
