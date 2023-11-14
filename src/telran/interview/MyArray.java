@@ -9,14 +9,16 @@ import java.util.HashMap;
  * @param <T>
  */
 public class MyArray {
-	//TODO fields of the class (encapsulation)
+	private int size;
+	private int allValues;
+	private HashMap<Integer, Integer> valuesMap = new HashMap<>();
 	/********************************************/
 	/**
 	 * constructor
 	 * @param size - length of the array
 	 */
 	public MyArray(int size) {
-		//TODO constructor
+		this.size= size; 
 	}
 	/**
 	 * sets all array's elements with a given value
@@ -24,7 +26,8 @@ public class MyArray {
 	 */
 	public void setAll(int value) {
 		
-		//TODO
+		valuesMap = new HashMap<>();
+		allValues = value;
 	}
 	/**
 	 *
@@ -32,8 +35,11 @@ public class MyArray {
 	 * @return value at given index or null if index is wrong
 	 */
 	public Integer get(int index) {
-		//TODO
-		return -1;
+		Integer res = null;
+		if (index >= 0 && index < size) {
+			res = valuesMap.getOrDefault(index, allValues);
+		}
+		return res;
 	}
 	/**
 	 * sets a given value at a given index
@@ -42,6 +48,9 @@ public class MyArray {
 	 * @param value
 	 */
 	public void set(int index, int value) {
-		//TODO
+		if(index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException(index);
+		}
+		valuesMap.put(index, value);
 	}
 }
