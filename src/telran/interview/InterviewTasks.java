@@ -1,7 +1,10 @@
 package telran.interview;
 
-import java.util.HashMap;
+import java.util.*;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 public class InterviewTasks {
 /**
@@ -128,6 +131,9 @@ public class InterviewTasks {
 		//grouping with counting of occurrences
 		//sorting in descending order of occurrences
 		//printing
+		Random gen = new Random();
+		Map<Integer, Long> map = gen.ints(nNumbers, 1, Integer.MAX_VALUE).mapToObj(n -> Integer.toString(Integer::toString).flatMapToInt(s -> s.chars()).mapToObj(n -> "" + (char)n).collect(Collectors.groupingBy(s -> s, Collectors.counting()));
+		map.entrySet().stream().forEach(e -> System.out.printf("%s - %d\n", e.getKey(), e.getValue()));
 	}
 	
 }
