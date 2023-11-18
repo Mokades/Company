@@ -152,7 +152,10 @@ public class InterviewTasks {
 	}
 	 */
 	public static void displayArrayShuffling(int []array) {
-		//TODO
+		Random gen = new Random();
+		gen.ints(1, 7)
+		.distinct().limit(7)
+		.forEach(n -> System.out.print(n + " "));
 	}
 	
 }
