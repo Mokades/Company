@@ -140,17 +140,7 @@ public class InterviewTasks {
 		.sorted((e1, e2) -> Long.compare(e2.getValue(), e1.getValue()))
 		.forEach(e -> System.out.printf("%s - %d\n", e.getKey(), e.getValue()));
 	}
-	/**
-	 * prints a given array in random shuffled order
-	 * @param array
-	 * Hint: see solution of sportloto from "java-streams" branch
-	 * void displaySportloto() {
-		Random gen = new Random();
-		gen.ints(1, 50)
-		.distinct().limit(7)
-		.forEach(n -> System.out.print(n + " "));
-	}
-	 */
+	
 	public static void displayArrayShuffling(int []array) {
 		Random gen = new Random();
 		gen.ints(1, 7)
