@@ -142,10 +142,8 @@ public class InterviewTasks {
 	}
 	
 	public static void displayArrayShuffling(int []array) {
-		Random gen = new Random();
-		gen.ints(1, 7)
-		.distinct().limit(7)
-		.forEach(n -> System.out.print(n + " "));
+		new Random().ints(0,array.length).distinct().limit(array.length).forEach(i -> System.out.println(array[i] + " "));
+		
 	}
 	
 }
