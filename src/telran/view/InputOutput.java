@@ -71,19 +71,36 @@ public interface InputOutput {
 		
 	}
 	default String readPredicate(String prompt, String errorPrompt, Predicate<String> predicate) {
-		//TODO
-		//returns string matching the given predicate
-		return null;
+		return readObject(prompt, errorPrompt, str -> {
+			if (!predicate.test(str)) {
+				throw new RuntimeException("doesn't math predicate");
+			}
+			return str;
+		});
 	}
 	default String readOptions(String prompt, String errorPrompt, Set<String> options) {
-		//TODO
-		//returns string included in the given options
-		return null;
+		return readObject(prompt, errorPrompt, str -> {
+			if (!options.contains(str)) {
+				throw new RuntimeException("no option");
+			}
+			return str;
+		});
 	}
 	default String readEmail(String prompt, String errorPrompt) {
-		//TODO
-		//returns string with a email address
-		return null;
+		return readObject(prompt, errorPrompt, str -> {
+			if(str.contains(" ")) {
+				throw new RuntimeException("cannot contain space");
+				
+			}
+			String[] emailParts = str.split("@");
+			if(emailParts.length != 2) {
+				throw new RuntimeException("must have two parts: name and domain separated by @");
+			}
+			if (!emailParts[1].contains(".")) {
+				throw new RuntimeException("domain must contain at least one dot");
+			}
+			return str;
+		});
 	}
 	default double readDouble(String prompt, String errorPrompt) {
 		return readObject(prompt, errorPrompt, Double::parseDouble);
